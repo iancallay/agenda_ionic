@@ -1,8 +1,7 @@
-
 <ion-content class="recuperar-password-page">
-  <div class="recuperar-container">
-    <h1 class="recuperar-title">Restablecer Contraseña</h1>
-    <p class="recuperar-subtitle">Ingresa tu correo y te enviaremos instrucciones.</p>
+  <div class="recuperar-container" style="margin: auto; width: 80%; max-width: 600px;">
+    <h1 class="recuperar-title">Recuperare Contraseña</h1>
+    <p class="recuperar-subtitle">Ingresa un correo valido</p>
 
     <ion-card>
       <ion-card-content>
@@ -10,8 +9,8 @@
           <ion-input [(ngModel)]="correo" type="email" placeholder="Correo Electrónico"></ion-input>
         </ion-item>
 
-        <ion-button expand="block" (click)="recuperarPassword()" class="recuperar-button">
-          Enviar Instrucciones
+        <ion-button expand="block" (click)="recuperarPassword()" class="recuperar-button" color="danger">
+          Recuperar contraseña
         </ion-button>
       </ion-card-content>
     </ion-card>

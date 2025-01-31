@@ -36,4 +36,22 @@ export class PersonaService {
     return this.http.post(this.API_URL, { accion: 'dato', codigo }, { headers });
   }
 
+  verificar_cedula(cedula: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post(this.API_URL, { accion: 'verificar_cedula', cedula }, { headers });
+  }
+
+  verificar_correo(correo: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post(this.API_URL, { accion: 'verificar_correo', correo }, { headers });
+  }
+
 }

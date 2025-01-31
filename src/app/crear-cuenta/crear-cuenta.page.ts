@@ -33,23 +33,41 @@ export class CrearCuentaPage {
       this.showAlert('Error', 'Las contraseñas no coinciden.');
       return;
     }
-
-    this.personaService.registrar({
-      nombre: this.nombre,
-      apellido: this.apellido,
-      cedula: this.cedula,
-      correo: this.correo,
-      clave: this.clave
-    }).subscribe(async response => {
+    this.personaService.verificar_cedula(this.cedula).subscribe(async response => {
       if (response.estado) {
-        this.showAlert('Éxito', 'Cuenta creada exitosamente. Ahora inicia sesión.');
-        this.router.navigate(['/login']);
+        this.showAlert('Error', 'La cédula ya está registrada.');
       } else {
-        this.showAlert('Error', response.response);
+        this.personaService.verificar_correo(this.correo).subscribe(async response => {
+          if (response.estado) {
+            this.showAlert('Error', 'El correo ya está registrado.');
+          } else {
+            const datos = {
+              nombre: this.nombre,
+              apellido: this.apellido,
+              cedula: this.cedula,
+              correo: this.correo,
+              clave: this.clave
+            };
+            this.personaService.registrar(datos).subscribe(async response => {
+              if (response.estado) {
+                this.showAlert('Éxito', response.response);
+                this.router.navigate(['/login']);
+              } else {
+                this.showAlert('Error', response.response);
+              }
+            }, error => {
+              this.showAlert('Error', response.response);
+            });
+          }
+        }, error => {
+          this.showAlert('Error', response.response);
+        });
       }
     }, error => {
       this.showAlert('Error', 'No se pudo conectar con el servidor.');
     });
+
+
   }
 
   async showAlert(title: string, message: string) {
