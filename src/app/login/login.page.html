@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" class="login-page">
-  <div class="login-container">
+  <div class="login-container" style="margin: auto; width: 80%; max-width: 400px;">
 
-    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <img src="assets/computadora-portatil.png" alt="Logo" class="logo" />
 
     <h1 class="login-title">INICIAR SESIÓN</h1>
 
@@ -13,15 +13,17 @@
         <ion-item>
           <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
         </ion-item>
-        <ion-button expand="block" (click)="login()" [disabled]="bloqueado" class="login-button">
+        <ion-button expand="block" (click)="login()" [disabled]="bloqueado" class="login-button" color="success">
           {{ bloqueado ? 'Bloqueado' : 'Ingresar' }}
         </ion-button>
 
         <div class="buttons-container">
-          <ion-button expand="block" fill="outline" (click)="crearCuenta()">Crear Cuenta</ion-button>
-          <ion-button expand="block" fill="clear" (click)="recuperarPassword()">Recuperar Contraseña</ion-button>
+          <ion-button expand="block" fill="outline" (click)="crearCuenta()" color="secondary" size="small">Crear
+            Cuenta</ion-button>
+          <ion-button expand="block" fill="clear" (click)="recuperarPassword()" color="warning" size="small">Recuperar
+            Contraseña</ion-button>
         </div>
-        
+
       </ion-card-content>
     </ion-card>
 

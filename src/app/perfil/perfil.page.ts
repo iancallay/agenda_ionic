@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 import { PerfilService } from '../services/perfil/perfil.service';
 
@@ -22,8 +22,9 @@ export class PerfilPage implements OnInit {
   constructor(
     private perfilService: PerfilService,
     private router: Router,
-    private alertController: AlertController
-  ) {}
+    private alertController: AlertController,
+    private NavController: NavController
+  ) { }
 
   ngOnInit() {
     this.cargarDatosUsuario();
@@ -42,6 +43,7 @@ export class PerfilPage implements OnInit {
         localStorage.setItem('userData', JSON.stringify(this.usuario));
         this.showAlert('Éxito', 'Tus datos han sido actualizados correctamente.');
         window.location.reload();
+        this.NavController.back();
       } else {
         this.showAlert('Error', 'No se pudo actualizar la información.');
       }
