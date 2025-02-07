@@ -32,4 +32,8 @@ export class ContactosService {
     return this.http.post<any>(`${this.apiURL}contacto.php`, data);
   }
 
+  guardar(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiURL}contacto.php`, data);
+  }
+
 }

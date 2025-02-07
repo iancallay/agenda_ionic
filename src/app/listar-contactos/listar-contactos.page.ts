@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { environment } from 'src/environments/environment.prod';
 import { ContactosService } from '../services/contactos/contactos.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-listar-contactos',
@@ -12,6 +13,7 @@ import { ContactosService } from '../services/contactos/contactos.service';
 })
 export class ListarContactosPage implements OnInit {
 
+  usuario: any = [];
   usuarios: any = null;
   contactos: any = [];
 
@@ -24,6 +26,13 @@ export class ListarContactosPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state?.['usuarios']) {
+      this.usuario = navigation.extras.state['usuarios'];
+      console.log('Datos del usuario listar-contactos:', this.usuario);
+    } else {
+      console.log('nada en listar-contactos.');
+    }
     this.todos();
   }
 
@@ -72,7 +81,10 @@ export class ListarContactosPage implements OnInit {
 
   buscar(event: any) { }
 
-  salir() { }
+  salir() {
+
+    this.router.navigate(['/login'], this.usuarios);
+  }
 
   backPage() {
     this.router.navigate(['/menu'], { state: { userData: this.usuarios } });

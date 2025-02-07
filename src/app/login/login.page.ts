@@ -16,6 +16,7 @@ export class LoginPage {
   bloqueado: boolean = false;
   tiempoRestante: number = 60; // 1 minuto en segundos
   interval: any;
+  usuario: any = [];
 
   constructor(
     private loginService: LoginService,
@@ -36,6 +37,8 @@ export class LoginPage {
 
     this.loginService.login(this.correo, this.password).subscribe(async response => {
       if (response && response.data) {
+        this.usuario = response.data;
+        console.log(this.usuario);
         localStorage.setItem('userData', JSON.stringify(response.data));
         this.router.navigate(['/menu']); // Redirigir al menú después del login
         this.intentosFallidos = 0; // Reiniciar intentos al ingresar correctamente
@@ -84,4 +87,24 @@ export class LoginPage {
     });
     await alert.present();
   }
+
+  myLogin() {
+    let data = {
+      email: this.correo,
+      password: this.password,
+      accion: 'login'
+    }
+    this.loginService.myLogin(data).subscribe((resp) => {
+
+      if (resp.estado) {
+        this.usuario = resp.data;
+        console.log(this.usuario);
+        this.router.navigate(['/menu'], this.usuario);
+      } else {
+        console.log(data);
+        this.showAlert('Error', resp.response);
+      }
+    });
+  }
+
 }

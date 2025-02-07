@@ -1,13 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>nuevoContacto</ion-title>
+    <ion-title>{{ id ? 'Editar Contacto': 'Nuevo Contacto'}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" lines="full">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">nuevoContacto</ion-title>
+      <ion-title size="large">Reseñas</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">id</ion-label>
+        <ion-input [(ngModel)]="usuario" required></ion-input>
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input [(ngModel)]="nombre_contacto" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input [(ngModel)]="apellido_contacto" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Telefono</ion-label>
+        <ion-input [(ngModel)]="telefono_contacto" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input [(ngModel)]="correo_contacto" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" color="primary" (click)="guardar()" color="success">
+        {{ id ? 'Actualizar' : 'Guardar' }} Contacto
+      </ion-button>
+    </ion-card-content>
+
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="backPage()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

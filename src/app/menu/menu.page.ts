@@ -13,10 +13,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class MenuPage implements OnInit {
   userData: any;
+  usuario: any = []
+  miusuario: any = [];
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state?.['usuario']) {
+      this.usuario = navigation.extras.state['usuario'];
+      console.log('Datos del usuario menu:', this.usuario);
+    } else {
+      console.log('Nada en menu.');
+    }
     // Obtener los datos del usuario desde la navegación
     if (this.router.getCurrentNavigation()?.extras.state?.['userData']) {
       this.userData = this.router.getCurrentNavigation()?.extras.state?.['userData'];
@@ -42,7 +51,7 @@ export class MenuPage implements OnInit {
   }
 
   contactos() {
-    this.router.navigate(['/listar-contactos']);
+    this.router.navigate(['/listar-contactos'], { state: { usuarios: this.usuario } });
   }
 }
 

@@ -20,6 +20,9 @@ export class LoginService {
     return this.http.post(this.API_URL, { accion: 'login', email: email, password: password }, { headers });
   }
 
+  myLogin(data: any): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}`, data);
+  }
 
   // registrar(datos: any): Observable<any> {
   //   const headers = new HttpHeaders({

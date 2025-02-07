@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'nuevo-contacto',
     loadChildren: () => import('./nuevo-contacto/nuevo-contacto.module').then( m => m.NuevoContactoPageModule)
+  },
+  {
+    path: 'edita-contacto',
+    loadChildren: () => import('./edita-contacto/edita-contacto.module').then( m => m.EditaContactoPageModule)
   }
 
 ];
