@@ -31,7 +31,7 @@ export class MenuPage implements OnInit {
       }
     }
   }
-  
+
   irPerfil() {
     this.router.navigate(['/perfil']); // Navegar a la página de perfil
   }
@@ -39,6 +39,10 @@ export class MenuPage implements OnInit {
   cerrarSesion() {
     localStorage.removeItem('userData'); // Eliminar datos de sesión
     this.router.navigate(['/login']); // Redirigir al login
+  }
+
+  contactos() {
+    this.router.navigate(['/listar-contactos']);
   }
 }
 

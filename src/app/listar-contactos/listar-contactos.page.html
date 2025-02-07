@@ -1,0 +1,93 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <!-- <h2 *ngIf="usuario"><strong>{{usuario.usu_nombre}} {{usuario.usu_apellido}}</strong></h2> -->
+        </ion-label>
+      </ion-item>
+
+      <ion-item (click)="nuevo()">
+        <ion-icon name="book-sharp" slot="start"></ion-icon>
+        <ion-label>Nuevo contacto</ion-label>
+      </ion-item>
+
+      <ion-item (click)="nuevo()">
+        <ion-icon name="sparkles-sharp" slot="start"></ion-icon>
+        <ion-label>Reseñas</ion-label>
+      </ion-item>
+
+      <ion-item (click)="salir()">
+        <ion-icon name="exit-sharp" slot="start"></ion-icon>
+        <ion-label>Salir</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Agenda Final</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" [scrollEvents]="true">
+    <!-- <h2 *ngIf="usuario"><strong>Bienvenido, {{usuario.usu_nombre}} {{usuario.usu_apellido}}</strong></h2> -->
+    <div class="container" style="margin: auto; width: 40%;">
+      <ion-searchbar debounce="50" placeholder="Buscar contactos..." (ionInput)="buscar($event)"
+        class="small-searchbar1">
+      </ion-searchbar>
+    </div>
+
+    <ion-list>
+      <ion-list-header lines="inset">
+        <ion-label>
+          Mis contactos
+        </ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let contacto of contactos; let i = index">
+        <ion-label>
+          <h2>{{ contacto.cod_contacto }}</h2>
+          <h3>Nombre: {{ contacto.nombre_contacto }} {{ contacto.apellido_contacto}}</h3>
+          <h3>Teléfono: {{ contacto.telefono_contacto}}</h3>
+          <ion-badge [color]="contacto.correo_contacto === 'null' ? 'warning' : 'success'">
+            Correo: {{ contacto.correo_contacto }}
+          </ion-badge>
+        </ion-label>
+
+        <ion-button *ngIf="contacto.codigo" (click)="editar(contacto.cod_contacto)"><ion-icon name="pencil"
+            title="Editar"></ion-icon> Escribir reseña</ion-button>
+
+        <ion-button color="danger" (click)="eliminar(contacto.cod_contacto)"><ion-icon name="trash"
+            title="Eliminar"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button (click)="backPage()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="nuevo()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <!-- Mensaje cuando no hay resultados -->
+    <div *ngIf="contactos.length === 0" class="no-results">
+      <p>No se encontraron resultados para la búsqueda.</p>
+    </div>
+  </ion-content>
+</div>
